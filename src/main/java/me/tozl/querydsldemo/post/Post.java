@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+/**
+ * 도메인 엔티티가 더러워 진다는 단점이 있다.
+ */
+//@NamedQuery(name = "Post.findByTitle", query = "SELECT p from Post AS p WHERE p.title = ?1")
 public class Post {
 
     @Id @GeneratedValue

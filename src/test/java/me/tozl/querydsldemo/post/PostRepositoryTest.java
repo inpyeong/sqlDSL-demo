@@ -21,9 +21,7 @@ public class PostRepositoryTest {
 
     @Test
     public void crud() {
-        Post post = new Post();
-        post.setTitle("jpa");
-        postRepository.save(post);
+        savePost("jpa");
 
         List<Post> all = postRepository.findAll();
         assertThat(all.size()).isEqualTo(1);
@@ -59,6 +57,27 @@ public class PostRepositoryTest {
 //        postUpdate.setTitle("tozl");
 
         List<Post> all = postRepository.findAll();
+        assertThat(all.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void findByTitleStartsWith() {
+        savePost("Spring Data Jpa");
+
+        List<Post> all = postRepository.findByTitleStartsWith("Spring");
+        assertThat(all.size()).isEqualTo(1);
+    }
+
+    private void savePost(String s) {
+        Post post = new Post();
+        post.setTitle(s);
+        postRepository.save(post);
+    }
+
+    @Test
+    public void findByTitle() {
+        savePost("Spring");
+        List<Post> all = postRepository.findByTitle("Spring");
         assertThat(all.size()).isEqualTo(1);
     }
 }
